@@ -1,0 +1,325 @@
+<div class="container" *ngIf="!showForm">
+  <button type="button" class="btn btn-secondary" (click)=" showForm= !showForm">NEW</button>
+</div>
+<div *ngIf="showForm" style="border: 10px black">
+  <form [formGroup]="dataForm" (ngSubmit)="onSubmitData()" #myForm>
+    <div class="container form-container">
+      <div class="row">
+        <div class="col-lg-3">
+          <label>NAME : </label><br>
+          <input type="text" placeholder="Name" formControlName="name" />
+        </div>
+        <div class="col-lg-3">
+          <label>AGE : </label><br>
+          <input type="number" min="18" placeholder="Age" formControlName="age" />
+        </div>
+        <div class="col-lg-3">
+          <label>EMAIL : </label><br>
+          <input type="email" placeholder="Email" formControlName="email">
+        </div>
+        <div class="col-lg-3">
+            <label>Current Location : </label><br>
+            <!-- <input type="select" placeholder="Current Location" formControlName="email"> -->
+            <select formControlName="currentLocation" style="height:25px" >
+                <option value="AL">Alabama</option>
+                <option value="AK">Alaska</option>
+                <option value="AZ">Arizona</option>
+                <option value="AR">Arkansas</option>
+                <option value="CA">California</option>
+                <option value="CO">Colorado</option>
+                <option value="CT">Connecticut</option>
+                <option value="DE">Delaware</option>
+                <option value="DC">District Of Columbia</option>
+                <option value="FL">Florida</option>
+                <option value="GA">Georgia</option>
+                <option value="HI">Hawaii</option>
+                <option value="ID">Idaho</option>
+                <option value="IL">Illinois</option>
+                <option value="IN">Indiana</option>
+                <option value="IA">Iowa</option>
+                <option value="KS">Kansas</option>
+                <option value="KY">Kentucky</option>
+                <option value="LA">Louisiana</option>
+                <option value="ME">Maine</option>
+                <option value="MD">Maryland</option>
+                <option value="MA">Massachusetts</option>
+                <option value="MI">Michigan</option>
+                <option value="MN">Minnesota</option>
+                <option value="MS">Mississippi</option>
+                <option value="MO">Missouri</option>
+                <option value="MT">Montana</option>
+                <option value="NE">Nebraska</option>
+                <option value="NV">Nevada</option>
+                <option value="NH">New Hampshire</option>
+                <option value="NJ">New Jersey</option>
+                <option value="NM">New Mexico</option>
+                <option value="NY">New York</option>
+                <option value="NC">North Carolina</option>
+                <option value="ND">North Dakota</option>
+                <option value="OH">Ohio</option>
+                <option value="OK">Oklahoma</option>
+                <option value="OR">Oregon</option>
+                <option value="PA">Pennsylvania</option>
+                <option value="RI">Rhode Island</option>
+                <option value="SC">South Carolina</option>
+                <option value="SD">South Dakota</option>
+                <option value="TN">Tennessee</option>
+                <option value="TX">Texas</option>
+                <option value="UT">Utah</option>
+                <option value="VT">Vermont</option>
+                <option value="VA">Virginia</option>
+                <option value="WA">Washington</option>
+                <option value="WV">West Virginia</option>
+                <option value="WI">Wisconsin</option>
+                <option value="WY">Wyoming</option>
+              </select>
+        </div>
+      </div>
+      <br>
+      <br>
+     
+
+
+      <div class="row">
+          <div class="col-lg-3">
+            <label>Expertise : </label><br>
+            <input type="text" placeholder="Expertise" formControlName="expertise" />
+          </div>
+          <div class="col-lg-2">
+            <label>Exp In Years : </label><br>
+            <input type="number" min="0" placeholder="Experience" formControlName="experience" />
+          </div>
+          <div class="col-lg-2">
+            <label>Visa Status:</label><br>
+            <select formControlName="visa" style="height: 25px">
+               <option value="Green Card">Green Card </option>
+               <option value="Us Citizen">US CITIZEN </option>
+               <option value="OPT">OPT</option>
+               <option value="CPT">CPT</option>
+               <option value="H1B">H1B</option>
+               <option value="H4 EAD">H4 EAD</option>
+            </select>
+          </div>
+          <div class="col-lg-2">
+              <label>Relocation : </label><br>
+              <select formControlName="relocation" style="height: 25px">
+                 <option value="true">YES </option>
+                 <option value="false">NO</option>
+              </select>
+          </div>
+          <div class="col-lg-3">
+              <label>Preffered States : </label><br>
+              <input type="text" placeholder="Preffered Location" formControlName="prefferedlocation"/>
+            </div>
+        </div>
+     
+     
+     
+     
+     
+     
+     
+     
+      <div class="container">
+        <button type="submit" class="btn btn-default">SUBMIT DATA</button> <span> | </span>
+        <button type="submit" class="btn btn-default" (click)="showForm=!showForm">HIDE FORM</button>
+      </div>
+      <div class="container" *ngIf="formError">
+        <h4>{{formError}}</h4>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <div class="row">
+          <div class="col-sm-1">
+            <th>Name</th>
+          </div>
+          <div class="col-sm-1">
+            <th>Age</th>
+
+          </div>
+          <div class="col-sm-2">
+            <th>Email</th>
+          </div>
+          <div class="col-sm-1">
+            <th>Expertise</th>
+          </div>
+          <div class="col-sm-1">
+            <th>Experience In Years<br>
+          </div>
+          <div class="col-sm-1">
+            <th>current Location</th>
+          </div>
+          <div class="col-sm-1">
+            <th>Relocation</th>
+          </div>
+          <div class="col-sm-1">
+            <th>Visa Status</th>
+          </div>
+          <div class="col-sm-1">
+            <th>preffred Location</th>
+          </div>
+          <div class="col-sm-2">
+            <th class="pagedisplay">Total Pages: <span style="background-color: black; color: white">{{totalpages}}</span><br>         
+            Page Number: <span style="background-color: black; color: white">{{pageNumber+1}}</span></th>
+         </div>
+
+        </div>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr *ngFor="let tabledata of tableData let i = index;">
+        <div class="row">
+          <div class="col-sm-1">
+            <input type="text" id="f1" value={{tabledata.name}} [disabled]="!enableUpdate[i]"
+              [(ngModel)]='tabledata.name' #f1="ngModel" required>
+            <div *ngIf="f1.errors">
+              Name is required.
+            </div>
+
+          </div>
+          <div class="col-sm-1">
+            <input type="number" id="f2" value={{tabledata.age}} [disabled]="!enableUpdate[i]"
+              [(ngModel)]='tabledata.age' #f2="ngModel" required>
+            <div *ngIf="f2.errors">
+              Age is required number
+            </div>
+
+          </div>
+          <div class="col-sm-2">
+            <input type="email" id="f3" value={{tabledata.email}} [disabled]="!enableUpdate[i]"
+              [(ngModel)]='tabledata.email' #f3="ngModel" required email>
+            <div *ngIf="f3.errors">
+              Invalid Email Id
+            </div>
+
+          </div>
+          <div class="col-sm-1">
+            <input type="text" [disabled]="!enableUpdate[i]" [(ngModel)]='tabledata.expertise' #f4="ngModel" required>
+          </div>
+          <div class="col-sm-1">
+            <input type="number" min="0" id="f5" value={{tabledata.experience}} [disabled]="!enableUpdate[i]"
+              [(ngModel)]='tabledata.experience' #f5="ngModel" required>
+          </div>
+          <div class="col-sm-1">
+            <!-- <input type="text" id="f6" value={{tabledata.currentLocation}} [disabled]="!enableUpdate[i]"
+              [(ngModel)]='tabledata.currentLocation' #f6="ngModel" required> -->
+            <input type="text" disabled="true" *ngIf="!enableUpdate[i]" value={{tabledata.currentLocation}}>
+           
+            <select (change)="setthecurrentLocation(i ,$event.target.value)"  *ngIf="enableUpdate[i]"  style="width:50px ; height: 25px;" required>
+                  <option value="AL">Alabama</option>
+                  <option value="AK">Alaska</option>
+                  <option value="AZ">Arizona</option>
+                  <option value="AR">Arkansas</option>
+                  <option value="CA">California</option>
+                  <option value="CO">Colorado</option>
+                  <option value="CT">Connecticut</option>
+                  <option value="DE">Delaware</option>
+                  <option value="DC">District Of Columbia</option>
+                  <option value="FL">Florida</option>
+                  <option value="GA">Georgia</option>
+                  <option value="HI">Hawaii</option>
+                  <option value="ID">Idaho</option>
+                  <option value="IL">Illinois</option>
+                  <option value="IN">Indiana</option>
+                  <option value="IA">Iowa</option>
+                  <option value="KS">Kansas</option>
+                  <option value="KY">Kentucky</option>
+                  <option value="LA">Louisiana</option>
+                  <option value="ME">Maine</option>
+                  <option value="MD">Maryland</option>
+                  <option value="MA">Massachusetts</option>
+                  <option value="MI">Michigan</option>
+                  <option value="MN">Minnesota</option>
+                  <option value="MS">Mississippi</option>
+                  <option value="MO">Missouri</option>
+                  <option value="MT">Montana</option>
+                  <option value="NE">Nebraska</option>
+                  <option value="NV">Nevada</option>
+                  <option value="NH">New Hampshire</option>
+                  <option value="NJ">New Jersey</option>
+                  <option value="NM">New Mexico</option>
+                  <option value="NY">New York</option>
+                  <option value="NC">North Carolina</option>
+                  <option value="ND">North Dakota</option>
+                  <option value="OH">Ohio</option>
+                  <option value="OK">Oklahoma</option>
+                  <option value="OR">Oregon</option>
+                  <option value="PA">Pennsylvania</option>
+                  <option value="RI">Rhode Island</option>
+                  <option value="SC">South Carolina</option>
+                  <option value="SD">South Dakota</option>
+                  <option value="TN">Tennessee</option>
+                  <option value="TX">Texas</option>
+                  <option value="UT">Utah</option>
+                  <option value="VT">Vermont</option>
+                  <option value="VA">Virginia</option>
+                  <option value="WA">Washington</option>
+                  <option value="WV">West Virginia</option>
+                  <option value="WI">Wisconsin</option>
+                  <option value="WY">Wyoming</option>
+                </select>
+                 
+          </div>
+          <div class="col-sm-1">
+            <input type="text" [value]="tabledata.opentorelocation?'YES':'NO'" *ngIf="!enableUpdate[i]"
+              [disabled]=true>
+            <select *ngIf="enableUpdate[i]" (change)="settheopentorelocation(i ,$event.target.value)" style="width:60px;height:25px">
+                <option value=""></option>
+                <option value=true>YES</option>
+                <option value=false>NO</option>
+            </select>
+          </div>
+          <div class="col-sm-1">
+            <input type="text" [disabled]=true [value]='tabledata.visaStatus' *ngIf="!enableUpdate[i]"/>
+            <select *ngIf="enableUpdate[i]" (change)="onchangevisastatus(i, $event.target.value)" style="width:60px; height:25px">
+               <option value=""></option>
+               <option value="Green Crad">Green Card</option>
+               <option value="US CITIZEN">US CITIZEN</option>
+               <option value="OPT">OPT</option>
+               <option value="CPT">CPT</option>
+               <option value="H1B">H1B</option>
+               <option value="H4 EAD">H4 EAD</option>
+            </select>
+          </div>
+         
+          <div class="col-sm-1">
+            <input type="" id="f9" [disabled]="!enableUpdate[i]" [(ngModel)]='tabledata.preffredLocation' #f9="ngModel">
+          </div>
+          <div class="col-lg-2">
+
+            <button style="background-color: skyblue" (click)=" viewDetails(i)">View</button>
+            <button style="background-color: red" *ngIf='!enableUpdate[i]' (click)="toggleenabledarr(i)" [disabled]="editing">Edit</button>
+            <button style="background-color: lightgreen" *ngIf='enableUpdate[i]'
+              (click)="updatedata(i, this.f1.value, this.f2.value, this.f3.value, this.f4.value, this.f5.value,this.f9.value, f9)"
+              [disabled]='(f1.invalid && f1.touched)||(f2.invalid && f2.touched) ||(f3.invalid && f3.touched) || (f4.invalid && f4.touched)|| (f5.invalid && f5.touched)||(f9.invalid && f9.touched)'>Save</button>
+
+            <button style="background-color: black; color: white" (click)='ondeletedata(i)'>Delete</button>
+
+          </div>
+        </div>
+
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="container">
+   <div class="row">
+      <div class="col-lg-4">
+      </div>
+      <div class="col-lg-4" style="text-align: center">
+        <button  style="width:60px" (click)="gotofirstpage()"><h4><<</h4></button>|
+        <button  [disabled]='pageNumber===0'style="width:60px" (click)="gotoprevpage()"><h4><</h4></button>|
+        <button  [disabled]='pageNumber == (totalpages-1)' style="width:60px" (click)="gotonextrpage()"><h4>></h4></button>|
+        <button  style="width:60px" (click)="gotolastpage()"><h4>>></h4></button>
+      </div>
+      <div class="col-lg-4">
+
+      </div>
+   </div>
+</div>

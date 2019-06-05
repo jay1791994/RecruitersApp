@@ -1,0 +1,39 @@
+<br>
+<br>
+<div class="container">
+   <div class="panel panel-success">
+      <div class="panel-heading">
+         <strong>{{data.name}}</strong>
+      </div>
+      <div class="panel-body">
+         Age is : {{data.age}}
+      </div>
+      <div class="panel-body">
+         EmailId is : {{data.email}}
+      </div>
+      <div class="panel-body">
+         Current Location  is : {{data.currentLocation}}
+      </div>
+      <div class="panel-body">
+         Preffred Locations are : {{data.preffredLocation}}
+      </div>
+      <div class="panel-body">
+         Expertise in is : {{data.expertise}}
+      </div>
+      <div class="panel-body">
+         Total Experience in Years : {{data.experience}}  Years
+      </div>
+      <div class="panel-body" *ngIf='data.opentorelocation'>
+         Open to Relocate Anywhere in Usa
+      </div>
+      <div class="panel-body" *ngIf='!data.opentorelocation'>
+        Not Open to Relocate. Available in Preffered Locations Only
+      </div>
+      <div class="panel-body" *ngIf='!data.opentorelocation'>
+         Current Visa Status : {{data.visaStatus}}
+     </div>
+      <div class="panel-body">
+         <button class="btn btn-primary" (click)="goback()"> BACK</button>
+      </div>
+   </div>
+</div>

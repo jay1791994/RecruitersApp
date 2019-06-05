@@ -1,0 +1,48 @@
+.btn{
+    height: 30px;
+    width: 100px;
+}
+
+
+.btn-secondary{
+    margin : 3% 0%;
+    width: 300px;
+    background-color: navy;
+    color: white;
+}
+
+.form-container{
+   border: 3em black;
+   margin-top: 3%;
+}
+
+.btn-default{
+    margin : 3% 0%;
+    width: 300px;
+    background-color: navy;
+    color: white;
+}
+
+.col-sm-1 input{
+    width: 96%;
+    margin-bottom: 5px;
+    overflow: hidden;
+}
+.col-sm-2 input{
+    width: 96%;
+    margin-bottom: 5px;
+    overflow: hidden;
+}
+.col-sm-2 button{
+    width: 60px;
+    margin-bottom: 5px;
+    overflow: hidden;
+}
+
+.pagedisplay{
+    background-color: tomato;
+    margin : 5%;
+    color: white;
+    padding: 10px;
+}
+
