@@ -5,4 +5,4 @@
  * @author jay17
  *
  */
-package com.jay.app.controller.repo;
+package com.jay.app.repo;

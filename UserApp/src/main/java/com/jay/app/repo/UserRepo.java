@@ -1,4 +1,4 @@
-package com.jay.app.controller.repo;
+package com.jay.app.repo;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;

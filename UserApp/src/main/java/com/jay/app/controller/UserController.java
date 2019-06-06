@@ -24,11 +24,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.jay.app.controller.repo.UserRepo;
+
 import com.jay.app.exception.EntityNotFoundException;
 import com.jay.app.exception.PageNotFoundException;
 import com.jay.app.exception.UserApiError;
 import com.jay.app.model.*;
+import com.jay.app.repo.UserRepo;
 
 @RestController
 @RequestMapping("api")
