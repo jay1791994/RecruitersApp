@@ -1,26 +1,42 @@
 package com.jay.app.aop;
 
+
+
 import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
 public class LogginAspect {
+	
+	Logger logger = LoggerFactory.getLogger(LogginAspect.class);
 
 	@Pointcut("execution(* com.jay.app.controller.*.*(..))") // expression 
-	private void businessService() {} 
+	private void usercontrollerrequests() {} 
 	
-	 @Before("businessService()")
+	 @Before("usercontrollerrequests()")
 	 public void doBeforeEntringTask(){
-	   System.out.println("Entering the User controller class");
+	
+      logger.info("ENTERING INTO THE USER CONTROLLER CLASS");
+	   
 	 }
 	
-	 @AfterReturning("businessService()")
-	 public void doAroundTask(){
+	 @AfterReturning("usercontrollerrequests()")
+	 public void doAfterReturningFromTask(){
+		 
+	    logger.info("AFTER RETURNING REPONSE SUCCESFULLY FROM USER CONTROLLER CLASS");	 
 	   System.out.println("User controller called ");
+	 }
+	 
+	 
+	 @AfterThrowing("usercontrollerrequests()")
+	 public void doAfterThrowingTask() {
+		  logger.info("AFTER THROWING AN ERROR FROM USER CONTROLLER CLASS");
 	 }
 }

@@ -48,12 +48,27 @@ export class Table1Component implements OnInit {
   }
   ondeletedata(index: number) {
     this.tableService.deletedata(this.tableData[index].userId).subscribe(
-        res=>{
-          if(res){
-          this.tableData.splice(index,1);
-          }
+       
+      res=>{
+        if(this.tableData.length == 1){
+          console.log("it was last index");
+          this.pageNumber = this.pageNumber - 1 ;
         }
+        
+        console.log("delete response is here");
+        this.tableService.getdata(this.pageNumber).subscribe(resp=>{
+          this.tableData = resp.content;
+          console.log(resp.content);
+          this.totalpages = resp.totalPages;
+          console.log("the page number is " + (this.pageNumber));
+          console.log("total pages remained are " +  resp.totalPages);
+        })
+      }, err=>{
+          return;
+      }
+        
     );
+
  
   }
   onSubmitData() {

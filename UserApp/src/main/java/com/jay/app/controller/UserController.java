@@ -2,6 +2,7 @@ package com.jay.app.controller;
 
 
 import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -11,51 +12,43 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.jay.app.controller.repo.UserRepo;
+import com.jay.app.exception.EntityNotFoundException;
+import com.jay.app.exception.PageNotFoundException;
+import com.jay.app.exception.UserApiError;
 import com.jay.app.model.*;
 
 @RestController
 @RequestMapping("api")
 public class UserController {
- 
 	
+	@ExceptionHandler({ HttpRequestMethodNotSupportedException.class })
+	ResponseEntity<UserApiError> handle(HttpRequestMethodNotSupportedException ex) {
+
+		UserApiError err = new UserApiError(HttpStatus.BAD_REQUEST, "Request Method Not Supported", ex);
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
+	}
+	
+	
+
 	@Autowired
 	UserRepo userRepo;
 	
-	@RequestMapping("first")
-	  User testing1() {
-		User user = new User();
-		user.setName("Yitao");
-		user.setAge(23);
-		user.setEmail("this@this.com");
-		user.setExperience(8);
-		user.setExpertise("Java");
-		user.setOpentorelocation(true);
-		user.setVisaStatus("OPT");
-	    user.setCurrentLocation("NJ");
-		List<String> li = new ArrayList<>();
-		li.add("NJ");
-		li.add("NY");
-		
-		user.setPreffredLocation(li);
-		
-		return user;
-		 
-	  }
 	
 	
-  @RequestMapping("test")
+  @RequestMapping("generatedata")
   String testing() {
 	  
 	  String[] locations = {"NJ","NY","PA","DE","VA","DC","MA","CA","AK","AR","TX","CT","OH"};
@@ -98,19 +91,29 @@ public class UserController {
   }
  
    @GetMapping("user/page/{pageNumber}")
-   Page<User> getUsers(@PathVariable int pageNumber) {
+   Page<User> getUsers(@PathVariable int pageNumber) throws PageNotFoundException {
     	  
 	   Pageable pageWithTenelements = PageRequest.of(pageNumber,10);
 	   Page<User> page = userRepo.findAll(pageWithTenelements);
+	   if(pageNumber > page.getTotalPages()) {
+			  
+		   throw new PageNotFoundException();
+	   }
 	   return page;
 
    }
    
    @GetMapping("user/page/sortbyexperience/{pageNumber}")
-   Page<User> getUserSortedByExperience(@PathVariable int pageNumber){
+   Page<User> getUserSortedByExperience(@PathVariable int pageNumber) throws PageNotFoundException{
 	   
 	   Pageable pagewithTenelementssortedbyexperience = PageRequest.of(pageNumber,10, Sort.by("experience"));
+	   
 	   Page<User> page = userRepo.findAll(pagewithTenelementssortedbyexperience);
+	   if(pageNumber > page.getTotalPages()) {
+			  
+		   throw new PageNotFoundException();
+	   }
+	  
 	   return page;
    }
    
@@ -119,43 +122,39 @@ public class UserController {
    
     @GetMapping("user/{userId}")
    // @CrossOrigin(origins = { "http://localhost:4200"})
-  	User getUser(@PathVariable String userId){
+  	User getUser (@PathVariable String userId) throws EntityNotFoundException{
   		  
     	 System.out.println(userId);
        
+    	
     	 Optional<User> user = userRepo.findById(userId);
     	 if(user.isPresent()) {
     		 return user.get();
+    	 }else {
+    		 throw new EntityNotFoundException();
     	 }
-    	 return null;
+    	
   	}
 	
     @PostMapping(path= "user")
-   // @CrossOrigin(origins = { "http://localhost:4200"})
     User createUser(@RequestBody User user){
   		
     	 System.out.println("came here");
     	 while(userRepo.existsById(user.getUserId())) {
     		 user.changeMyId();
     	 }
-    	 
     	 userRepo.insert(user);
     	 return user;
   	}
     
     @PutMapping("user")
-   // @CrossOrigin(origins = { "http://localhost:4200"})
     User  updateUser(@RequestBody User user){
-  		
-       
-    	
-    	 userRepo.save(user);
+  		 userRepo.save(user);
     	 return user;
   	}
     
     @DeleteMapping("user/{id}")
-   // @CrossOrigin(origins = { "http://localhost:4200"})
-    User delateUser(@PathVariable String id){
+    User delateUser(@PathVariable String id) /*throws EntityNotFoundException */{
   		 System.out.println("delete method called");
     	  System.out.println(id);
     	  Optional<User> u = userRepo.findById(id);
@@ -164,8 +163,10 @@ public class UserController {
         	  System.out.println(u.get().getUserId());
         	  return u.get();
         	  
+          }else {
+        	 return null;
           }
-          return null;
+         
           
   	}
 	
