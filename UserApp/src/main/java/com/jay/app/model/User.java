@@ -66,7 +66,7 @@ public class User {
 	public String getName() {
 		return name;
 	}
-	public static String getRandomeUserId() {
+	private static String getRandomeUserId() {
 		
 	   Random ren = new Random();
 	   String charArr = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcedefghijklmnopqrstuvwxyz";

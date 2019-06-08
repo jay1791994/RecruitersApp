@@ -1,8 +1,11 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { TableService } from '../service/table.service';
 import { Tabledata } from '../model/tabledata';
-import { FormGroup, FormControl, Validators, EmailValidator, NgModel } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormGroup, FormControl, Validators, NgModel } from '@angular/forms';
+import { Router} from '@angular/router';
+import {  HttpClient } from '@angular/common/http';
+import { UploadService } from '../service/upload.service';
+
 
 @Component({
   selector: 'app-table1',
@@ -11,6 +14,8 @@ import { Router } from '@angular/router';
 })
 export class Table1Component implements OnInit {
 
+  exceldata : Tabledata[];
+  file : File;
   totalpages : number ;
   pageNumber : number = 0 ;
   editing: boolean = false;
@@ -30,7 +35,7 @@ export class Table1Component implements OnInit {
     prefferedlocation: new FormControl('Anywhere')
   });
   
-  constructor(private tableService: TableService, private router: Router) {
+  constructor(private tableService: TableService, private router: Router, private http:HttpClient, private uploadService: UploadService) {
 
    }
   ngOnInit() {
@@ -54,7 +59,9 @@ export class Table1Component implements OnInit {
           console.log("it was last index");
           this.pageNumber = this.pageNumber - 1 ;
         }
-        
+        if(this.pageNumber < 0){
+          this.pageNumber = 0 ;
+        }
         console.log("delete response is here");
         this.tableService.getdata(this.pageNumber).subscribe(resp=>{
           this.tableData = resp.content;
@@ -241,5 +248,54 @@ export class Table1Component implements OnInit {
          this.enableUpdate[i] = false;
        }
   }
+
+  selectFile(event) {
+    this.file = event.target.files[0];
+    this.uploadService.fileupload(this.file);
+    //fileupload();
+
+ }
+
+  // fileupload(){
+  //   let navigationExtras: NavigationExtras;
+  // this.uploadFile("http://localhost:8080/file/upload",this.file).pipe(
+  //        map( res=>{
+           
+  //         return res;
+  //        } 
+       
+  //         )  
+  //        ).subscribe(res =>{
+
+  //            this.exceldata = res.body;
+            
+  //        },
+  //        error =>{
+  //          console.log("this is called on error")
+  //        },
+  //        () => {
+  //         this.uploadService.setUploadData(this.exceldata);
+  //         this.router.navigate(['uploaddata']);
+  //        } )
+     
+  // }
+
+  // uploadFile(url: string, file: File): Observable<any>{
+
+  //   let formData = new FormData();
+  //   formData.append('upload', file);
+
+  //   let params = new HttpParams();
+
+  //   const options = {
+  //     params: params,
+  //     reportProgress: true,
+  //   };
+
+  //   const req = new HttpRequest('POST', url, formData, options);
+  //   return this.http.request(req);
+  // }
+ 
+
 
 }

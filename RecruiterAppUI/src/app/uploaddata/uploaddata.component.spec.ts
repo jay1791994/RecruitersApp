@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Table2Component } from './table2.component';
+import { UploaddataComponent } from './uploaddata.component';
 
-describe('Table2Component', () => {
-  let component: Table2Component;
-  let fixture: ComponentFixture<Table2Component>;
+describe('UploaddataComponent', () => {
+  let component: UploaddataComponent;
+  let fixture: ComponentFixture<UploaddataComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ Table2Component ]
+      declarations: [ UploaddataComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(Table2Component);
+    fixture = TestBed.createComponent(UploaddataComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

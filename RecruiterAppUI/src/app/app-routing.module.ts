@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { Table1Component } from './table1/table1.component';
-import { Table2Component } from './table2/table2.component';
 import { DetailsComponent } from './details/details.component';
+import { UploaddataComponent } from './uploaddata/uploaddata.component';
+import { HomeComponent } from './Home/home.component';
 
 const routes: Routes = [
   {path:'table1', component:Table1Component},
-  {path:'table2', component:Table2Component},
+  {path:'home', component: HomeComponent},
   {path:'viewdetails/:userId', component: DetailsComponent},
-  {path:'', component:Table2Component, pathMatch:"full"}
+  {path:'uploaddata', component: UploaddataComponent},
+  {path:'', component:HomeComponent, pathMatch:"full"}
 
 ];
 

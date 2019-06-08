@@ -1,0 +1,50 @@
+<h1 style="text-align: center"> VIEW DATA TO BE SUBMITTED </h1>
+<div class="container">
+<table class="table">
+    <thead>
+      <tr>
+         <th>Name</th>
+         <th>Age</th>
+         <th>Email</th>
+         <th>Expertise</th>
+         <th>Experience</th>
+         <th>Current Location</th>
+         <th>OpentoRelocate</th>
+         <th>PrefferedLocation</th>
+         <th>Visa Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let uploadelement of uploaddata" [style.background-color]= 'color'>
+
+         {{changecolor()}}
+         <td>{{uploadelement.name}}</td>
+         <td>{{uploadelement.age}}</td>
+         <td>{{uploadelement.email}}</td>
+         <td>{{uploadelement.expertise}}</td>
+         <td>{{uploadelement.experience}}</td>
+         <td>{{uploadelement.currentLocation}}</td>
+         <td>{{uploadelement.opentorelocation}}</td>
+         <td>{{uploadelement.preffredLocation}}</td>
+         <td>{{uploadelement.visaStatus}}</td>
+
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="container">
+  <div class="col-lg-5">
+  </div>
+  <div class="col-lg-1">
+      <button class="btn btn-primary" (click)="uploadthisdata()" >SUBMIT</button>
+   </div>
+   <div class="col-lg-1">
+      <button class="btn btn-primary" (click)="goback()">BACK</button>
+   </div>
+  
+  <div class="col-lg-5">
+  </div>
+
+</div>
+

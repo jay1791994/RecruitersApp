@@ -46,5 +46,13 @@ export class TableService {
      
   }
 
+  generatedata(): Observable<any>{
+    return this.http.get(this.localhost+"/api/user/generatedata");
+  }
+
+  deletealldata(): Observable<any>{
+    return this.http.delete(this.localhost+"/api/user/deleteall");
+  }
+
   
 }

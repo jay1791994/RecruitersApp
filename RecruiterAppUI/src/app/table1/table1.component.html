@@ -1,5 +1,9 @@
 <div class="container" *ngIf="!showForm">
   <button type="button" class="btn btn-secondary" (click)=" showForm= !showForm">NEW</button>
+   
+  || <label class="btn btn-default btn-file">
+      UPLOAD <input type="file" id="fileinput" (change)="selectFile($event)" value="UPLOAD" style="background-color: navy; color: white;display: none" #inputfile  accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+  </label>
 </div>
 <div *ngIf="showForm" style="border: 10px black">
   <form [formGroup]="dataForm" (ngSubmit)="onSubmitData()" #myForm>

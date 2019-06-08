@@ -3,22 +3,22 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { Table1Component } from './table1/table1.component';
-import { Table2Component } from './table2/table2.component';
+import { HomeComponent } from './Home/home.component';
 import { HeaderComponent } from './header/header.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { DetailsComponent } from './details/details.component';
 import { HttpClientModule } from '@angular/common/http';
-
-
+import { UploaddataComponent } from './uploaddata/uploaddata.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     Table1Component,
-    Table2Component,
+    HomeComponent,
     HeaderComponent,
     DetailsComponent,
+    UploaddataComponent,
     
     
   ],

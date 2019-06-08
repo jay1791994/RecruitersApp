@@ -3,9 +3,12 @@ package com.jay.app.controller;
 
 import java.util.ArrayList;
 
+
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -47,10 +50,16 @@ public class UserController {
 	@Autowired
 	UserRepo userRepo;
 	
+	@RequestMapping("test")
+	void testing() {
+		System.out.println("Reference is "+  userRepo.toString());
+	}
 	
 	
-  @RequestMapping("generatedata")
-  String testing() {
+	
+	
+  @RequestMapping("user/generatedata")
+  String generateData() {
 	  
 	  String[] locations = {"NJ","NY","PA","DE","VA","DC","MA","CA","AK","AR","TX","CT","OH"};
 	  String[] expertise = {"JAVA",".NET","BA","QA","DATA SCIENCE","ML/AI","ANDROID"};
@@ -77,7 +86,7 @@ public class UserController {
 		  
 		  
 		  user.setPreffredLocation(list);
-		  user.setUserId(User.getRandomeUserId());
+		  user.changeMyId();
 		  while(userRepo.existsById(user.getUserId())) {
 	    		 user.changeMyId();
 	      }
@@ -103,6 +112,42 @@ public class UserController {
 	   return page;
 
    }
+   
+   
+   
+   
+   @DeleteMapping("user/deleteall")
+   boolean deleteall() {
+	   
+	   userRepo.deleteAll();
+	   return true;
+	   
+   }
+   
+   
+   
+   
+   @PostMapping("user/userlist")
+   List<User> createUserinList(@RequestBody List<User> userList){
+	   
+	   
+	   Function<User, User> userfunction = user -> {
+		     String id = user.getUserId();
+		     while(userRepo.existsById(id)) {
+		    	 user.changeMyId();
+		    	 id = user.getUserId();
+		     }
+	       return user;
+	   };
+	 
+	   
+	   List<User> userli = userList.stream().map(userfunction).collect(Collectors.toList());
+       userRepo.insert(userList);
+	   return userList;
+   }
+   
+   
+   
    
    @GetMapping("user/page/sortbyexperience/{pageNumber}")
    Page<User> getUserSortedByExperience(@PathVariable int pageNumber) throws PageNotFoundException{
@@ -132,6 +177,7 @@ public class UserController {
     	 if(user.isPresent()) {
     		 return user.get();
     	 }else {
+    		
     		 throw new EntityNotFoundException();
     	 }
     	
@@ -144,6 +190,8 @@ public class UserController {
     	 while(userRepo.existsById(user.getUserId())) {
     		 user.changeMyId();
     	 }
+    	 
+    	 
     	 userRepo.insert(user);
     	 return user;
   	}
@@ -158,10 +206,11 @@ public class UserController {
     User delateUser(@PathVariable String id) /*throws EntityNotFoundException */{
   		 System.out.println("delete method called");
     	  System.out.println(id);
-    	  Optional<User> u = userRepo.findById(id);
+    	Optional<User> u = userRepo.findById(id);
+    	
           if(u.isPresent()) {
         	  userRepo.deleteById(id);
-        	  System.out.println(u.get().getUserId());
+        	
         	  return u.get();
         	  
           }else {

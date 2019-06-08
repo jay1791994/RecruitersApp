@@ -17,14 +17,22 @@ public class LogginAspect {
 	
 	Logger logger = LoggerFactory.getLogger(LogginAspect.class);
 
-	@Pointcut("execution(* com.jay.app.controller.*.*(..))") // expression 
+	@Pointcut("execution(* com.jay.app.controller.UserController.*(..))") // expression 
 	private void usercontrollerrequests() {} 
+	
+	@Pointcut("execution(* com.jay.app.controller.FileController.*(..))") // expression 
+	private void  filecontrollerrequests() {} 
 	
 	 @Before("usercontrollerrequests()")
 	 public void doBeforeEntringTask(){
 	
       logger.info("ENTERING INTO THE USER CONTROLLER CLASS");
 	   
+	 }
+	 
+	 @Before("filecontrollerrequests()")
+	 public void doBeforeFileControllerMethod() {
+		 logger.info("Entering to file controller class");;
 	 }
 	
 	 @AfterReturning("usercontrollerrequests()")
