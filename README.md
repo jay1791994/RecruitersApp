@@ -11,7 +11,11 @@ To start the application in your machine, follow the below steos:
 
 3)  open the cmd/terminal and change the directory to "../RecruitersApp".
     There should be two folder under this folder : 1) RecruitersAppUI(FrontEnd)   2) UserApp(Backend)
-4)  change directory to RecruitersApp.
+    
+    Download and Install node.js and npm on your machine if not available
+    link: https://nodejs.org/en/download/
+    
+4)  change directory to : "../RecruitersApp/RecruitersAppUI".
 
 5)  Run command :        npm install
 
