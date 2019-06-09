@@ -1,12 +1,11 @@
 # RecruitersApp
 
 THESE APPLICATION REQUIRES PORT 8080, 4200 AND 27017 TO BE FREE ON THE MACHINE TO BE STARTED ON.
+To start the application in your machine, follow the below steos:
 
-TO START THIS PROJECT IN YOUR MACHINE, FOLLOW THE STEPS :
+1 ) Clone the git repository :  https://github.com/jay1791994/RecruitersApp.git
 
-1 ) CLONE THE GIT REPOSITORY:  https://github.com/jay1791994/RecruitersApp.git
-
-2)  IT WILL CREATE A FOLDER NAMED "RecruitersApp".
+2)  Ii will create a folder named "RecruitersApp" where the repo in cloned.
 
     FOR STARTING USER INTERFACE
 
