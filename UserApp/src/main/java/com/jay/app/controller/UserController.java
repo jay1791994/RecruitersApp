@@ -59,8 +59,9 @@ public class UserController {
 	
 	
   @RequestMapping("user/generatedata")
-  String generateData() {
+  boolean generateData() throws Exception {
 	  
+	  try {
 	  String[] locations = {"NJ","NY","PA","DE","VA","DC","MA","CA","AK","AR","TX","CT","OH"};
 	  String[] expertise = {"JAVA",".NET","BA","QA","DATA SCIENCE","ML/AI","ANDROID"};
 	  String[] visastatus = {"OPT","CPT","GREEN CARD","US CITIZEN","H1B","H4 EAD"};
@@ -93,11 +94,17 @@ public class UserController {
 		  
 		  userRepo.save(user);
 	  }
+	  return true;
+	  }
+	  catch(Exception e) {
+		
+		  throw new Exception();
+	  
+	  }
 	  
 	  
 	  
 	  
-	  return "datagerated";
   }
  
    @GetMapping("user/page/{pageNumber}")

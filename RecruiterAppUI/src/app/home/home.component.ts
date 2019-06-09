@@ -18,10 +18,14 @@ export class HomeComponent implements OnInit {
    genratedata(){
     this.tableService.generatedata().subscribe(
       res =>{
-        console.log(res)
+      
+        alert("Data Generated Successfully!!!");
       },
       err =>{
         console.log(err)
+      },
+      () =>{
+
       }
     )
    }
@@ -29,7 +33,10 @@ export class HomeComponent implements OnInit {
 
    deletedata(){
      this.tableService.deletealldata().subscribe(
-        res => {console.log(res)},
+        res => {
+          console.log(res)
+          alert("Data Deleted Successfully!!!");
+         },
         err => {console.log(err)}
      )
    }
